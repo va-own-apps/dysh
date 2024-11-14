@@ -3,3 +3,8 @@ export interface LogMessage {
     message: string;
     params?: object[];
 }
+
+export enum LogLevel {
+    DEBUG,
+    ERROR,
+}

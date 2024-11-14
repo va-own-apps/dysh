@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { LogMessage } from './logger.type';
+import { LogLevel, LogMessage } from './logger.type';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggerService {
-
+  readonly logLevel: LogLevel = environment.logLevel || LogLevel.ERROR;
   constructor() {
   }
 
@@ -28,6 +29,9 @@ export class LoggerService {
   }
 
   debug(log: LogMessage): void {
+    if (this.logLevel !== LogLevel.DEBUG) {
+      return;
+    }
     console.debug(this.formatLog(log), ...log.params || []);
   }
 
